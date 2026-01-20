@@ -1,0 +1,516 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --nfl-blue: #013369;
+    --nfl-red: #D50A0A;
+    --nfl-white: #FFFFFF;
+    --offense-color: #1a5f2a;
+    --defense-color: #8b1538;
+    --special-color: #c4a000;
+    --bg-light: #f8f9fa;
+    --text-dark: #1a1a2e;
+    --text-muted: #6c757d;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Language Display */
+body.lang-en .zh,
+body.lang-zh .en {
+    display: none;
+}
+
+body.lang-both .en,
+body.lang-both .zh {
+    display: inline;
+}
+
+body.lang-both .zh::before {
+    content: " | ";
+    color: var(--text-muted);
+}
+
+body.lang-both p .zh::before,
+body.lang-both .sub-position .zh::before {
+    content: "";
+    display: block;
+    margin-top: 0.5em;
+    color: var(--text-muted);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--nfl-blue) 0%, #024a96 100%);
+    color: var(--nfl-white);
+    padding: 60px 0 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.02) 10px,
+        rgba(255,255,255,0.02) 20px
+    );
+    pointer-events: none;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero .subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+}
+
+/* Language Switch */
+.lang-switch {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.lang-switch button {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.lang-switch button:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+.lang-switch button.active {
+    background: var(--nfl-white);
+    color: var(--nfl-blue);
+    border-color: var(--nfl-white);
+}
+
+/* Table of Contents */
+.toc {
+    background: var(--nfl-white);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.toc .container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.toc a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    padding: 10px 25px;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.toc a:hover {
+    background: var(--bg-light);
+}
+
+.toc a:nth-child(1):hover { color: var(--offense-color); }
+.toc a:nth-child(2):hover { color: var(--defense-color); }
+.toc a:nth-child(3):hover { color: var(--special-color); }
+
+/* Introduction */
+.intro {
+    background: var(--nfl-white);
+    padding: 40px;
+    border-radius: 16px;
+    margin: 40px 0;
+    box-shadow: var(--card-shadow);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* Position Groups */
+.position-group {
+    margin: 60px 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    padding: 20px 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    color: white;
+    display: inline-block;
+}
+
+.offense-title { background: var(--offense-color); }
+.defense-title { background: var(--defense-color); }
+.special-title { background: var(--special-color); }
+
+/* Position Cards */
+.position-card {
+    background: var(--nfl-white);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border-left: 5px solid transparent;
+}
+
+.position-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.position-group:nth-child(1) .position-card { border-left-color: var(--offense-color); }
+.position-group:nth-child(2) .position-card { border-left-color: var(--defense-color); }
+.position-group:nth-child(3) .position-card { border-left-color: var(--special-color); }
+
+#offense .position-card { border-left-color: var(--offense-color); }
+#defense .position-card { border-left-color: var(--defense-color); }
+#special-teams .position-card { border-left-color: var(--special-color); }
+
+.position-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.position-abbr {
+    background: var(--nfl-blue);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+#offense .position-abbr { background: var(--offense-color); }
+#defense .position-abbr { background: var(--defense-color); }
+#special-teams .position-abbr { background: var(--special-color); }
+
+.position-header h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.position-card p {
+    color: var(--text-dark);
+    line-height: 1.8;
+}
+
+/* Sub-positions */
+.sub-positions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: grid;
+    gap: 12px;
+}
+
+.sub-position {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 15px;
+    background: var(--bg-light);
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.sub-position strong {
+    background: var(--nfl-blue);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+#offense .sub-position strong { background: var(--offense-color); }
+#defense .sub-position strong { background: var(--defense-color); }
+#special-teams .sub-position strong { background: var(--special-color); }
+
+/* Field Diagram */
+.field-section {
+    margin: 60px 0;
+}
+
+.field-section h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: var(--nfl-blue);
+}
+
+.field-diagram {
+    background: var(--nfl-white);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+}
+
+.field {
+    display: flex;
+    background: #2d5a27;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 120px;
+}
+
+.end-zone {
+    background: var(--nfl-blue);
+    color: white;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-align: center;
+    padding: 10px;
+}
+
+.yard-lines {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    position: relative;
+}
+
+.yard-lines::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent calc(10% - 1px),
+        rgba(255,255,255,0.3) calc(10% - 1px),
+        rgba(255,255,255,0.3) 10%
+    );
+}
+
+.yard-lines span {
+    position: relative;
+    z-index: 1;
+}
+
+.field-info {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--text-muted);
+}
+
+/* Scoring Section */
+.scoring-section {
+    margin: 60px 0;
+}
+
+.scoring-section h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: var(--nfl-blue);
+}
+
+.scoring-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.score-item {
+    background: var(--nfl-white);
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.score-item:hover {
+    transform: translateY(-5px);
+}
+
+.score-points {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--nfl-red);
+    line-height: 1;
+}
+
+.score-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 10px 0;
+    color: var(--nfl-blue);
+}
+
+.score-item p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Footer */
+footer {
+    background: var(--nfl-blue);
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 60px;
+}
+
+footer p {
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 25px;
+    border: 2px solid white;
+    border-radius: 25px;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+footer a:hover {
+    background: white;
+    color: var(--nfl-blue);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero .subtitle {
+        font-size: 1rem;
+    }
+
+    .toc .container {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .toc a {
+        padding: 8px 20px;
+    }
+
+    .intro {
+        padding: 25px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        padding: 15px 20px;
+    }
+
+    .position-card {
+        padding: 20px;
+    }
+
+    .position-header h3 {
+        font-size: 1.2rem;
+    }
+
+    .field {
+        height: 80px;
+    }
+
+    .end-zone {
+        font-size: 0.5rem;
+    }
+
+    .yard-lines {
+        font-size: 0.7rem;
+    }
+
+    .scoring-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lang-switch {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .scoring-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 40px 0 60px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .lang-switch,
+    .toc {
+        display: none;
+    }
+
+    .position-card {
+        break-inside: avoid;
+    }
+}
